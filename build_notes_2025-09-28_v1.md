@@ -1,0 +1,1 @@
+This is the content for the first build note. It describes the initial setup and basic styling. This version includes the initial glassmorphism effect and basic layout. Initial field order was different.

@@ -1,0 +1,1 @@
+This is the content for the second build note. It describes the field reordering and the refined data-item styling. This version reflects the updated field order and improved spacing.
