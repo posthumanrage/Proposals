@@ -213,3 +213,4 @@ Upon receiving a request, adhere to the following mandatory steps:
 2.  **Read Prompt:** Read `prompt.md`.
 3.  **Execute Instructions:** Interpret and execute instructions in `prompt.md` as direct user commands.
 4.  **Report Outcome:** Report outcome to user.
+This line was added by Jules for testing purposes.
