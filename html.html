@@ -163,317 +163,423 @@
         border-radius: 0.25rem;
         margin-bottom: 0.5rem;
     }
+
+    .main-layout {
+        display: flex;
+        height: 100vh;
+    }
+    .left-menu {
+        width: 300px;
+        flex-shrink: 0;
+        background: var(--card-bg);
+        border-right: 1px solid var(--card-border);
+        padding: 1.5rem;
+        overflow-y: auto;
+    }
+    .right-content {
+        flex-grow: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .right-content main {
+        flex-grow: 1;
+    }
+    #build-notes-list li {
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--card-border);
+        border-radius: 0.375rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    #build-notes-list li:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: var(--hover-border-color);
+    }
+    #build-notes-list li.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+    .note-meta {
+        font-size: 0.8rem;
+        color: var(--text-color-light);
+    }
 </style>
 </head>
 <body class="antialiased">
-
-    <header class="sticky top-0 z-10 border-b transition-colors duration-300" style="background: var(--card-bg);">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
-            <div>
-                <h1 class="text-2xl font-bold" style="color: var(--text-color-heading);">Proposal Document</h1>
-                <p class="mt-1" style="color: var(--text-color-light);" id="header-subtitle"></p>
-            </div>
-            <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors">
-                <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            </button>
-        </div>
-    </header>
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-
-<div class="container proposal-container grid gap-8">
-<div class="proposal-section">
-<h2 class="section-title">Account & POC Information</h2>
-<div class="data-grid">
-<div class="data-item mb-4">
-    <span class="data-label">🌨️Salesforce Account Lookup:</span>
-    <a href="#" id="salesforce-report-link" class="data-value text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Click to View</a>
-</div>
-<div class="data-item">
-    <span class="data-label">Account Name:</span>
-    <span class="data-value copyable" id="account-name"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Account Type:</span>
-<span class="data-value copyable" id="account-type"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Industry:</span>
-<span class="data-value copyable" id="account-industry"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Street Address:</span>
-<span class="data-value copyable" id="account-street-address"></span>
-</div>
-<div class="data-item">
-<span class="data-label">City, State:</span>
-<span class="data-value copyable" id="account-city-state"></span>
-</div>
-<div class="data-item">
-<span class="data-label">POC Name:</span>
-<span class="data-value copyable" id="poc-name"></span>
-</div>
-<div class="data-item">
-<span class="data-label">POC Title:</span>
-<span class="data-value copyable" id="poc-title"></span>
-</div>
-<div class="data-item">
-<span class="data-label">POC Persona:</span>
-<span class="data-value copyable" id="poc-persona"></span>
-</div>
-<div class="data-item">
-<span class="data-label">POC Phone:</span>
-<span class="data-value copyable" id="poc-phone"></span>
-</div>
-<div class="data-item">
-<span class="data-label">POC Email:</span>
-<span class="data-value copyable" id="poc-email"></span>
-</div>
-</div>
-</div>
-<div class="proposal-section">
-<h2 class="section-title">Project & Salesforce Details</h2>
-<div class="data-grid">
-<div class="data-item">
-<span class="data-label">Opportunity Name:</span>
-<span class="data-value copyable" id="project-opportunity-name"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Close Date:</span>
-<span class="data-value copyable" id="project-close-date"></span>
-</div>
-
-<div class="data-item">
-<span class="data-label">Stage:</span>
-<span class="data-value copyable" id="project-stage"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Type:</span>
-<span class="data-value copyable" id="project-type"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Forecast Category:</span>
-<span class="data-value copyable" id="project-forecast-category"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Lead Source:</span>
-<span class="data-value copyable" id="project-lead-source"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Amount:</span>
-<span class="data-value copyable" id="project-amount"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Other Bids:</span>
-<span class="data-value copyable" id="project-other-bids"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Flooring System Recommended:</span>
-<span class="data-value copyable" id="project-flooring-system"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Bid Type:</span>
-<span class="data-value copyable" id="project-bid-type"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Prevailing Wage:</span>
-<span class="data-value copyable" id="project-prevailing-wage"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Proposal Name:</span>
-<span class="data-value copyable" id="project-proposal-name"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Square Footage:</span>
-<span class="data-value copyable" id="project-square-footage"></span>
-</div>
-</div>
-</div>
-<div class="proposal-section">
-<h2 class="section-title">Scope of Work (SOW)</h2>
-<div class="flex items-center justify-between mb-4">
-<span class="data-label">SOW Title:</span>
-<span class="data-value copyable" id="sow-project-title"></span>
-<button id="full-sow-copy-button" class="copy-button">Copy
-Full SOW <i class="bi bi-clipboard-check"></i></button>
-</div>
-<div class="flex items-center justify-between mb-4">
-<span class="data-label">Building:</span>
-<span class="data-value copyable" id="sow-building"></span>
-</div>
-<div class="flex items-center justify-between mb-4">
-<span class="data-label">Section:</span>
-<span class="data-value copyable" id="sow-section"></span>
-</div>
-<div id="sow-container"></div>
-<h3 class="section-title mt-8">Investment Summary
-Comments</h3>
-<div class="data-grid">
-<div class="data-item">
-<span class="data-label">Generator Comments:</span>
-<span class="data-value copyable" id="investment-generator-comments"></span>
-</div>
-<div class="data-item">
-<span class="data-label">Mobilization Comments:</span>
-<span class="data-value copyable" id="investment-mobilization-comments"></span>
-</div>
-</div>
-</div>
-</div>
-</main>
-    <footer class="text-center py-10 mt-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-500 text-sm border-t">
-        <p>&copy; 2025 QuestMark Corporation. For internal use only.</p>
-        <p class="mt-1">Need help? Contact <a href="mailto:samuel.tunes@centimark.com" class="text-blue-400 hover:underline">IT Support</a>.</p>
-    </footer>
-    <script src="./html_files/data.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const copyToClipboard = (text, element) => {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-            document.execCommand('copy');
-            if (element.classList.contains('copied-feedback')) return;
-            element.classList.add('copied-feedback');
-            setTimeout(() => element.classList.remove('copied-feedback'), 1500);
-        } catch (err) {
-            console.error('Could not copy text: ', err);
-        } finally {
-            document.body.removeChild(textarea);
-        }
-    };
-
-    const renderSow = (sowData) => {
-        const sowContainer = document.getElementById('sow-container');
-        if (!sowContainer) return;
-        sowContainer.innerHTML = sowData.map(section => `
-            <div class="sow-section mb-4">
-                <h4>${section.title}</h4>
-                <div>
-                    ${section.content.map(line => `
-                        <div class="sow-item data-value
-copyable">${line}</div>
-                    `).join('')}
+    <div class="main-layout">
+        <aside class="left-menu">
+            <h2 class="section-title">Build Notes</h2>
+            <ul id="build-notes-list">
+                <!-- JS will populate this -->
+            </ul>
+        </aside>
+        <div class="right-content">
+            <header class="sticky top-0 z-10 border-b transition-colors duration-300" style="background: var(--card-bg);">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+                    <div>
+                        <h1 class="text-2xl font-bold" style="color: var(--text-color-heading);">Proposal Document</h1>
+                        <p class="mt-1" style="color: var(--text-color-light);" id="header-subtitle"></p>
+                    </div>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-white/10 transition-colors">
+                        <svg id="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        <svg id="theme-icon-light" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </button>
                 </div>
-            </div>
-        `).join('');
-    };
+            </header>
+            <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="container proposal-container grid gap-8">
+                    <div class="proposal-section">
+                        <h2 class="section-title">Account & POC Information</h2>
+                        <div class="data-grid">
+                            <div class="data-item mb-4">
+                                <span class="data-label">🌨️Salesforce Account Lookup:</span>
+                                <a href="#" id="salesforce-report-link" class="data-value text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">Click to View</a>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Account Name:</span>
+                                <span class="data-value copyable" id="account-name"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Account Type:</span>
+                                <span class="data-value copyable" id="account-type"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Industry:</span>
+                                <span class="data-value copyable" id="account-industry"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Street Address:</span>
+                                <span class="data-value copyable" id="account-street-address"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">City, State:</span>
+                                <span class="data-value copyable" id="account-city-state"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">POC Name:</span>
+                                <span class="data-value copyable" id="poc-name"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">POC Title:</span>
+                                <span class="data-value copyable" id="poc-title"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">POC Persona:</span>
+                                <span class="data-value copyable" id="poc-persona"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">POC Phone:</span>
+                                <span class="data-value copyable" id="poc-phone"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">POC Email:</span>
+                                <span class="data-value copyable" id="poc-email"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proposal-section">
+                        <h2 class="section-title">Project & Salesforce Details</h2>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <span class="data-label">Opportunity Name:</span>
+                                <span class="data-value copyable" id="project-opportunity-name"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Close Date:</span>
+                                <span class="data-value copyable" id="project-close-date"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Stage:</span>
+                                <span class="data-value copyable" id="project-stage"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Type:</span>
+                                <span class="data-value copyable" id="project-type"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Forecast Category:</span>
+                                <span class="data-value copyable" id="project-forecast-category"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Lead Source:</span>
+                                <span class="data-value copyable" id="project-lead-source"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Amount:</span>
+                                <span class="data-value copyable" id="project-amount"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Other Bids:</span>
+                                <span class="data-value copyable" id="project-other-bids"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Flooring System Recommended:</span>
+                                <span class="data-value copyable" id="project-flooring-system"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Bid Type:</span>
+                                <span class="data-value copyable" id="project-bid-type"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Prevailing Wage:</span>
+                                <span class="data-value copyable" id="project-prevailing-wage"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Proposal Name:</span>
+                                <span class="data-value copyable" id="project-proposal-name"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Square Footage:</span>
+                                <span class="data-value copyable" id="project-square-footage"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proposal-section">
+                        <h2 class="section-title">Scope of Work (SOW)</h2>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="data-label">SOW Title:</span>
+                            <span class="data-value copyable" id="sow-project-title"></span>
+                            <button id="full-sow-copy-button" class="copy-button">Copy Full SOW <i class="bi bi-clipboard-check"></i></button>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="data-label">Building:</span>
+                            <span class="data-value copyable" id="sow-building"></span>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="data-label">Section:</span>
+                            <span class="data-value copyable" id="sow-section"></span>
+                        </div>
+                        <div id="sow-container"></div>
+                        <h3 class="section-title mt-8">Investment Summary Comments</h3>
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <span class="data-label">Generator Comments:</span>
+                                <span class="data-value copyable" id="investment-generator-comments"></span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Mobilization Comments:</span>
+                                <span class="data-value copyable" id="investment-mobilization-comments"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="text-center py-10 mt-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-gray-500 text-sm border-t">
+                <p>&copy; 2025 QuestMark Corporation. For internal use only.</p>
+                <p class="mt-1">Need help? Contact <a href="mailto:samuel.tunes@centimark.com" class="text-blue-400 hover:underline">IT Support</a>.</p>
+            </footer>
+        </div>
+    </div>
+    <script src="./html_files/data.js"></script>
+    <script src="./html_files/build_notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyToClipboard = (text, element) => {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    if (element.classList.contains('copied-feedback')) return;
+                    element.classList.add('copied-feedback');
+                    setTimeout(() => element.classList.remove('copied-feedback'), 1500);
+                } catch (err) {
+                    console.error('Could not copy text: ', err);
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            };
 
-    document.title = proposalData.accountInfo.name + ' - Proposal Document';
-    document.getElementById('header-subtitle').textContent = proposalData.projectDetails.proposalName;
+            const renderSow = (sowData) => {
+                const sowContainer = document.getElementById('sow-container');
+                if (!sowContainer) return;
+                sowContainer.innerHTML = sowData.map(section => `
+                    <div class="sow-section mb-4">
+                        <h4>${section.title}</h4>
+                        <div>
+                            ${section.content.map(line => `
+                                <div class="sow-item data-value copyable">${line}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+            };
 
-    // Populate Account Info
-    document.getElementById('account-type').textContent = proposalData.accountInfo.type;
-    document.getElementById('account-industry').textContent = proposalData.accountInfo.industry;
-    document.getElementById('account-street-address').textContent = proposalData.accountInfo.streetAddress;
-    document.getElementById('account-city-state').textContent = proposalData.accountInfo.cityState;
-    document.getElementById('poc-name').textContent = proposalData.accountInfo.poc.name;
-    document.getElementById('poc-title').textContent = proposalData.accountInfo.poc.title;
-    document.getElementById('poc-persona').textContent = proposalData.accountInfo.poc.persona;
-    document.getElementById('poc-phone').textContent = proposalData.accountInfo.poc.phone;
-    document.getElementById('poc-email').textContent = proposalData.accountInfo.poc.email;
+            const populateProposalData = () => {
+                const proposalContainer = document.querySelector('.proposal-container');
+                if (proposalContainer) {
+                    proposalContainer.style.display = 'grid';
+                }
 
-    // Populate Project Details
-    document.getElementById('project-opportunity-name').textContent = proposalData.projectDetails.opportunityName;
-    document.getElementById('project-close-date').textContent = proposalData.projectDetails.closeDate;
-    document.getElementById('account-name').textContent = proposalData.accountInfo.name; // Moved from Account Info
-    document.getElementById('project-stage').textContent = proposalData.projectDetails.stage;
-    document.getElementById('project-type').textContent = proposalData.projectDetails.type;
-    document.getElementById('project-forecast-category').textContent = proposalData.projectDetails.forecastCategory;
-    document.getElementById('project-lead-source').textContent = proposalData.projectDetails.leadSource;
-    document.getElementById('project-amount').textContent = proposalData.projectDetails.amount;
-    document.getElementById('project-other-bids').textContent = proposalData.projectDetails.otherBids;
-    document.getElementById('project-flooring-system').textContent = proposalData.projectDetails.flooringSystem;
-    document.getElementById('project-bid-type').textContent = proposalData.projectDetails.bidType;
-    document.getElementById('project-prevailing-wage').textContent = proposalData.projectDetails.prevailingWage;
-    document.getElementById('project-proposal-name').textContent = proposalData.projectDetails.proposalName;
-    document.getElementById('project-square-footage').textContent = proposalData.projectDetails.squareFootage;
-        // Construct Salesforce Report URL dynamically
-    const baseUrl = "https://centimark.lightning.force.com/lightning/r/Report/00OVo00000JKklJMAT/view";
-    const zip = proposalData.projectDetails.zip;
-    const state = proposalData.projectDetails.state;
-    const city = proposalData.projectDetails.city;
-    const streetNumber = proposalData.projectDetails.streetNumber;
+                document.title = proposalData.accountInfo.name + ' - Proposal Document';
+                document.getElementById('header-subtitle').textContent = proposalData.projectDetails.proposalName;
 
-    if (zip && state && city && streetNumber) {
-        const salesforceReportUrl = `${baseUrl}?fv5=${encodeURIComponent(zip)}&fv6=${encodeURIComponent(state)}&fv7=${encodeURIComponent(city)}&fv8=${encodeURIComponent(streetNumber)}`;
-        document.getElementById('salesforce-report-link').href = salesforceReportUrl;
-    } else {
-        document.getElementById('salesforce-report-link').href = "#"; // Or hide the link if data is incomplete
-    }
+                // Populate Account Info
+                document.getElementById('account-type').textContent = proposalData.accountInfo.type;
+                document.getElementById('account-industry').textContent = proposalData.accountInfo.industry;
+                document.getElementById('account-street-address').textContent = proposalData.accountInfo.streetAddress;
+                document.getElementById('account-city-state').textContent = proposalData.accountInfo.cityState;
+                document.getElementById('poc-name').textContent = proposalData.accountInfo.poc.name;
+                document.getElementById('poc-title').textContent = proposalData.accountInfo.poc.title;
+                document.getElementById('poc-persona').textContent = proposalData.accountInfo.poc.persona;
+                document.getElementById('poc-phone').textContent = proposalData.accountInfo.poc.phone;
+                document.getElementById('poc-email').textContent = proposalData.accountInfo.poc.email;
 
-    // Populate SOW
-    document.getElementById('sow-project-title').textContent = proposalData.sow.title;
-    document.getElementById('sow-building').textContent = proposalData.sow.building;
-    document.getElementById('sow-section').textContent = proposalData.sow.section;
-    renderSow(proposalData.sow.data);
+                // Populate Project Details
+                document.getElementById('project-opportunity-name').textContent = proposalData.projectDetails.opportunityName;
+                document.getElementById('project-close-date').textContent = proposalData.projectDetails.closeDate;
+                document.getElementById('account-name').textContent = proposalData.accountInfo.name;
+                document.getElementById('project-stage').textContent = proposalData.projectDetails.stage;
+                document.getElementById('project-type').textContent = proposalData.projectDetails.type;
+                document.getElementById('project-forecast-category').textContent = proposalData.projectDetails.forecastCategory;
+                document.getElementById('project-lead-source').textContent = proposalData.projectDetails.leadSource;
+                document.getElementById('project-amount').textContent = proposalData.projectDetails.amount;
+                document.getElementById('project-other-bids').textContent = proposalData.projectDetails.otherBids;
+                document.getElementById('project-flooring-system').textContent = proposalData.projectDetails.flooringSystem;
+                document.getElementById('project-bid-type').textContent = proposalData.projectDetails.bidType;
+                document.getElementById('project-prevailing-wage').textContent = proposalData.projectDetails.prevailingWage;
+                document.getElementById('project-proposal-name').textContent = proposalData.projectDetails.proposalName;
+                document.getElementById('project-square-footage').textContent = proposalData.projectDetails.squareFootage;
 
-    // Populate Investment Summary
-    document.getElementById('investment-generator-comments').textContent = proposalData.investmentSummary.generatorComments;
-    document.getElementById('investment-mobilization-comments').textContent = proposalData.investmentSummary.mobilizationComments;
+                const baseUrl = "https://centimark.lightning.force.com/lightning/r/Report/00OVo00000JKklJMAT/view";
+                const zip = proposalData.projectDetails.zip;
+                const state = proposalData.projectDetails.state;
+                const city = proposalData.projectDetails.city;
+                const streetNumber = proposalData.projectDetails.streetNumber;
 
-    // Setup copy functionality
-    document.addEventListener('click', e => {
-        const copyableEl = e.target.closest('.copyable');
-        const sowCopyBtn = e.target.closest('#full-sow-copy-button');
+                if (zip && state && city && streetNumber) {
+                    const salesforceReportUrl = `${baseUrl}?fv5=${encodeURIComponent(zip)}&fv6=${encodeURIComponent(state)}&fv7=${encodeURIComponent(city)}&fv8=${encodeURIComponent(streetNumber)}`;
+                    document.getElementById('salesforce-report-link').href = salesforceReportUrl;
+                } else {
+                    document.getElementById('salesforce-report-link').href = "#";
+                }
 
-        if (copyableEl) {
-            copyToClipboard(copyableEl.textContent.trim(), copyableEl);
-            return;
-        }
+                // Populate SOW
+                document.getElementById('sow-project-title').textContent = proposalData.sow.title;
+                document.getElementById('sow-building').textContent = proposalData.sow.building;
+                document.getElementById('sow-section').textContent = proposalData.sow.section;
+                renderSow(proposalData.sow.data);
 
-        if (sowCopyBtn) {
-            let fullSowText = `SOW Title: ${proposalData.sow.title}\n\n`; // Add main SOW title
-        
-            // Add SOW sections
-            fullSowText += proposalData.sow.data.map(section =>
-                `${section.title}\n${section.content.join('\n')}`
-            ).join('\n\n');
-        
-            // Add Investment Summary
-            fullSowText += `\n\n---Investment Summary---\n\n`; // Add header
-            fullSowText += `Mobilization Comments:\n${proposalData.investmentSummary.mobilizationComments}\n\n`; // Mobilization first
-            fullSowText += `Generator Comments:\n${proposalData.investmentSummary.generatorComments}`; // Generator second
-        
-            copyToClipboard(fullSowText, sowCopyBtn);
-            return;
-        }    });
+                // Populate Investment Summary
+                document.getElementById('investment-generator-comments').textContent = proposalData.investmentSummary.generatorComments;
+                document.getElementById('investment-mobilization-comments').textContent = proposalData.investmentSummary.mobilizationComments;
+            };
 
-    // --- Theme Toggle ---
-    const themeToggle = document.getElementById('theme-toggle');
-    const darkIcon = document.getElementById('theme-icon-dark');
-    const lightIcon = document.getElementById('theme-icon-light');
-    const userTheme = localStorage.getItem('theme');
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const loadBuildNoteContent = (content) => {
+                const mainContent = document.querySelector('.right-content main');
+                const proposalContainer = mainContent.querySelector('.proposal-container');
+                if (proposalContainer) {
+                    proposalContainer.style.display = 'none';
+                }
 
-    const applyTheme = (theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-        if (theme === 'dark') {
-            darkIcon?.classList.remove('hidden');
-            lightIcon?.classList.add('hidden');
-        } else {
-            darkIcon?.classList.add('hidden');
-            lightIcon?.classList.remove('hidden');
-        }
-    };
+                let contentContainer = mainContent.querySelector('#build-note-content');
+                if (!contentContainer) {
+                    contentContainer = document.createElement('div');
+                    contentContainer.id = 'build-note-content';
+                    contentContainer.className = 'proposal-section'; // Re-use styling
+                    mainContent.appendChild(contentContainer);
+                }
+                contentContainer.innerHTML = marked.parse(content);
+            };
 
-    if (userTheme === 'dark' || (!userTheme && systemTheme)) {
-        applyTheme('dark');
-    } else {
-        applyTheme('light');
-    }
+            const notesList = document.getElementById('build-notes-list');
+            buildNotesData.forEach((note, index) => {
+                const listItem = document.createElement('li');
+                listItem.dataset.index = index;
 
-    themeToggle?.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme') ?? 'dark';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('theme', newTheme);
-        applyTheme(newTheme);
-    });
-});
-</script>
+                const fileNameDiv = document.createElement('div');
+                fileNameDiv.textContent = note.filename;
+
+                const modifiedDiv = document.createElement('div');
+                modifiedDiv.className = 'note-meta';
+                modifiedDiv.textContent = new Date(note.modified).toLocaleString();
+
+                listItem.appendChild(fileNameDiv);
+                listItem.appendChild(modifiedDiv);
+
+                listItem.addEventListener('click', () => {
+                    // Remove active class from any currently active item
+                    const currentActive = notesList.querySelector('.active');
+                    if (currentActive) {
+                        currentActive.classList.remove('active');
+                    }
+                    // Add active class to the clicked item
+                    listItem.classList.add('active');
+                    loadBuildNoteContent(note.content);
+                });
+
+                notesList.appendChild(listItem);
+            });
+
+            // Initially load the proposal data and set the first note as active
+            populateProposalData();
+            if (notesList.firstChild) {
+                notesList.firstChild.classList.add('active');
+                // Initially show proposal, not a build note.
+                // loadBuildNoteContent(buildNotesData[0].content);
+            }
+
+            // Setup copy functionality
+            document.addEventListener('click', e => {
+                const copyableEl = e.target.closest('.copyable');
+                const sowCopyBtn = e.target.closest('#full-sow-copy-button');
+
+                if (copyableEl) {
+                    copyToClipboard(copyableEl.textContent.trim(), copyableEl);
+                    return;
+                }
+
+                if (sowCopyBtn) {
+                    let fullSowText = `SOW Title: ${proposalData.sow.title}\n\n`;
+                    fullSowText += proposalData.sow.data.map(section =>
+                        `${section.title}\n${section.content.join('\n')}`
+                    ).join('\n\n');
+                    fullSowText += `\n\n---Investment Summary---\n\n`;
+                    fullSowText += `Mobilization Comments:\n${proposalData.investmentSummary.mobilizationComments}\n\n`;
+                    fullSowText += `Generator Comments:\n${proposalData.investmentSummary.generatorComments}`;
+                    copyToClipboard(fullSowText, sowCopyBtn);
+                    return;
+                }
+            });
+
+            // --- Theme Toggle ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-icon-dark');
+            const lightIcon = document.getElementById('theme-icon-light');
+            const userTheme = localStorage.getItem('theme');
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            const applyTheme = (theme) => {
+                document.documentElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    darkIcon?.classList.remove('hidden');
+                    lightIcon?.classList.add('hidden');
+                } else {
+                    darkIcon?.classList.add('hidden');
+                    lightIcon?.classList.remove('hidden');
+                }
+            };
+
+            if (userTheme === 'dark' || (!userTheme && systemTheme)) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+
+            themeToggle?.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme') ?? 'dark';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+        });
+    </script>
 </body>
 </html>
